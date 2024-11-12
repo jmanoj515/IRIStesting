@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="IRIS" version="26" zv="IRIS for Windows (x86-64) 2024.1 (Build 267.2U)" ts="2024-11-12 18:02:06">
+<Export generator="IRIS" version="26" zv="IRIS for Windows (x86-64) 2024.1 (Build 267.2U)" ts="2024-11-12 22:47:26">
 <Class name="Mano.Properties">
 <Super>%Persistent</Super>
-<TimeChanged>67024,69611.1675646</TimeChanged>
+<TimeChanged>67156,66003.2332835</TimeChanged>
 <TimeCreated>67024,49514.1087798</TimeCreated>
 
 <Property name="Name">
@@ -22,6 +22,10 @@
 
 <Property name="DOB">
 <Type>%Date</Type>
+</Property>
+
+<Property name="Dummy">
+<Type>%String</Type>
 </Property>
 
 <Method name="checkDOBValid">
@@ -56,6 +60,9 @@
 </Value>
 <Value name="4">
 <Value>DOB</Value>
+</Value>
+<Value name="5">
+<Value>Dummy</Value>
 </Value>
 </Data>
 </Storage>
