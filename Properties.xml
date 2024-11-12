@@ -29,7 +29,7 @@
 <FormalSpec>DOB="07/03/2024"</FormalSpec>
 <Implementation><![CDATA[
 	Set DOB=$ZDATEH(DOB)
-	Set Obj = ..%New()
+	//Set Obj = ..%New()
 	Set Obj.DOB=Obj.DOBIsValid(DOB)
 	Write !,"LD=>",Obj.DOBLogicalToDisplay(DOB),!
 	Set Res=Obj.%Save()
