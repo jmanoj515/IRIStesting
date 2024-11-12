@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="CacheGitHubCI.REST">
+<Super>%CSP.REST</Super>
+<TimeCreated>63594,50226.449506</TimeCreated>
+
+<XData name="UrlMap">
+<Data><![CDATA[
+<Routes>
+   <!-- Test method-->
+   <Route Url="/Test" Method="GET" Call="Test"/>
+    <Route Url="/receive/:owner/:repository/:namespace" Method="POST" Call="Receive"/>
+ </Routes>
+]]></Data>
+</XData>
+
+<Method name="Test">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	Write "{""Status"": ""OK""}"
+	Return $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Receive">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>Owner:%String,Repository:%String,Namespace=$Namespace</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	Return:'(%request.GetCgiEnv("HTTP_USER_AGENT") [ "GitHub-Hookshot") $$$ERROR($$$GeneralError,"Wrong origins")
+	Set st = ##class(CacheGitHubCI.Hook).Update(Owner,Repository,Namespace)
+	Return st
+]]></Implementation>
+</Method>
+</Class>
+</Export>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="CacheGitHubCI.Task">
+<Description>
+Simple update task. Use CacheGitHubCI.Hook if you need more functionality.</Description>
+<Super>%SYS.Task.Definition</Super>
+<TimeCreated>63600,45875.997358</TimeCreated>
+
+<Parameter name="TaskName">
+<Default>GitHubUpdateTask</Default>
+</Parameter>
+
+<Property name="GitHubURL">
+<Description>
+Repository URL, like https://github.com/intersystems-ru/Cache-MDX2JSON</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="Username">
+<Description><![CDATA[
+GitHub user, who has access to repository. Optional for public repositories.<br>
+Note, that with Username/Password, you can make up to 5,000 requests per hour. 
+For unauthenticated requests, the rate limit allows to make up to 60 requests per hour. 
+Unauthenticated requests are associated with an IP address.<br>
+Required, if you want to create webhooks]]></Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="Password">
+<Description>
+GitHub password, corresponding to Username. Optional for public repositories.</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="Namespace">
+<Description>
+Namespace, where to download and compile repository</Description>
+<Type>%String</Type>
+<InitialExpression>$Namespace</InitialExpression>
+</Property>
+
+<Method name="OnTask">
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	Return:'##class(%SYS.Namespace).Exists(..Namespace) $$$ERROR($$$NamespaceUnavailable,..Namespace)
+	
+	Set Owner = $p(..GitHubURL,"/",4)
+	Set Repository = $p(..GitHubURL,"/",5)
+	
+	If ('##class(CacheGitHubCI.Hook).%ExistsId(Owner_"||"_Repository_"||"_..Namespace)) {
+		Set hook = ##class(CacheGitHubCI.Hook).%New(Owner,Repository,"",..Username,..Password,..Namespace)
+		Do hook.%Save()
+		kill hook
+	} 
+	
+	Quit ##class(CacheGitHubCI.Hook).Update(Owner,Repository,..Namespace)
+]]></Implementation>
+</Method>
+</Class>
+</Export>
