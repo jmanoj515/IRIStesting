@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> 
 <Export generator="IRIS" version="26" zv="IRIS for Windows (x86-64) 2024.1 (Build 267.2U)" ts="2024-11-12 23:05:43">
 <Class name="Mano.NewProduction">
 <Super>Ens.Production</Super>
@@ -8,7 +8,7 @@
 <XData name="ProductionDefinition">
 <Data><![CDATA[
 <Production Name="Mano.NewProduction" LogGeneralTraceEvents="false">
-  <Description></Description>
+  <Description>Testing</Description>
   <ActorPoolSize>2</ActorPoolSize>
 </Production>
 ]]></Data>
